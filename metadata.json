@@ -1,0 +1,6 @@
+{
+  "name": "LexLens",
+  "description": "Document-first AI legal information assistant for analyzing, comparing, and navigating legal documents with clause-level source citations and professional review checklists.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

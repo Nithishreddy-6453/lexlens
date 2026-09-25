@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "DocumentRecord": {
+      "title": "DocumentRecord",
+      "description": "A stored legal document with structured analysis from Gemini",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "fileName": { "type": "string" },
+        "fileSize": { "type": "number" },
+        "uploadedAt": { "type": "string" },
+        "documentType": { "type": "string" },
+        "jurisdiction": { "type": "string" },
+        "pageCount": { "type": "number" },
+        "pdfDataUrl": { "type": "string" },
+        "executiveSummary": { "type": "string" },
+        "governingLaw": { "type": "string" },
+        "purpose": { "type": "string" },
+        "monetaryTerms": { "type": "string" },
+        "analysis": {
+          "type": "object",
+          "properties": {
+            "executiveSummary": { "type": "string" },
+            "analyzedAt": { "type": "string" },
+            "documentType": { "type": "string" },
+            "jurisdiction": { "type": "string" },
+            "pageCount": { "type": "number" },
+            "governingLaw": { "type": "string" },
+            "purpose": { "type": "string" },
+            "monetaryTerms": { "type": "string" }
+          }
+        }
+      },
+      "required": ["id", "title", "fileName", "uploadedAt", "documentType", "jurisdiction"]
+    }
+  },
+  "firestore": {
+    "/documents/{documentId}": {
+      "schema": "DocumentRecord",
+      "description": "Collection of analyzed legal documents with source citations and structured clause breakdowns."
+    },
+    "/chatHistories/{documentId}": {
+      "schema": "ChatHistoryRecord",
+      "description": "Conversation history for Ask This Document keyed by documentId."
+    }
+  }
+}

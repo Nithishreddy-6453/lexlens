@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    match /documents/{documentId} {
+      allow read: if true;
+      allow create, update: if isValidId(documentId)
+        && request.resource.data.title is string
+        && request.resource.data.title.size() <= 300
+        && request.resource.data.documentType is string;
+      allow delete: if isValidId(documentId);
+    }
+
+    match /chatHistories/{documentId} {
+      allow read, write: if isValidId(documentId);
+    }
+  }
+}
